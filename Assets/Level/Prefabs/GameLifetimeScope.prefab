@@ -165,6 +165,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   audioService: {fileID: 8910473606648059591}
+  configLoader: {fileID: 11400000, guid: 01273a02b99ee244a932a357da8dd6ad, type: 2}
 --- !u!1001 &8815455170088683111
 PrefabInstance:
   m_ObjectHideFlags: 0
