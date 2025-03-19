@@ -15,9 +15,12 @@ MonoBehaviour:
   soundCategories:
   - SFX
   musicCategories:
-  - 
+  - Music
   Sounds:
   - {fileID: 11400000, guid: 3a53a23602f54f448bbffe04de85a8c4, type: 2}
+  - {fileID: 11400000, guid: 4f6d22763a5629441951b0a7b8388bb2, type: 2}
+  - {fileID: 11400000, guid: c3794de55eba8174490eec2af7e61245, type: 2}
+  - {fileID: 11400000, guid: 0840472ef6ffd264ca0a23bed3d7688e, type: 2}
   Music:
   - {fileID: 11400000, guid: a061487d390aec240b09d70aebc2bf4b, type: 2}
   useCustomNames: 1
@@ -34,9 +37,12 @@ MonoBehaviour:
   - name: SFX
     files:
     - {fileID: 11400000, guid: 3a53a23602f54f448bbffe04de85a8c4, type: 2}
+    - {fileID: 11400000, guid: 4f6d22763a5629441951b0a7b8388bb2, type: 2}
+    - {fileID: 11400000, guid: c3794de55eba8174490eec2af7e61245, type: 2}
+    - {fileID: 11400000, guid: 0840472ef6ffd264ca0a23bed3d7688e, type: 2}
     foldout: 1
   musicCategoriesToList:
-  - name: 
+  - name: Music
     files:
     - {fileID: 11400000, guid: a061487d390aec240b09d70aebc2bf4b, type: 2}
     foldout: 1

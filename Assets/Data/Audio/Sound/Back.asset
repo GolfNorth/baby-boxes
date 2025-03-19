@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   safeName: 
   presetDescription: 
-  files: []
+  files:
+  - {fileID: 8300000, guid: f9d025350e965184685b78da72a3ef92, type: 3}
+  - {fileID: 8300000, guid: aeed523903c80c4468c3f01d02705bee, type: 3}
+  - {fileID: 8300000, guid: 93d10121072735e4a994c8b6b013ee0c, type: 3}
+  - {fileID: 8300000, guid: d3b84ee4d2d3a5049bd38baa3fa33d61, type: 3}
   neverRepeat: 0
   loopStart: 0
   loopEnd: 0

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Code.Services.Audio;
 using Code.Services.Interfaces;
 using JSAM;
@@ -13,7 +12,7 @@ namespace Code.Services
     /// </summary>
     public sealed class AudioService : MonoBehaviour, IAudioService
     {
-        [SerializeField]
+        [SerializeField, Tooltip("Библиотека аудио")]
         private AudioLibrary library;
 
         private Dictionary<string, Sound> _nameToSound;
