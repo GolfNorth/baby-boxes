@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Code.UI.Components
+namespace Game.UI.Components
 {
     /// <summary>
     /// Компонент для распределения перемещения объектов
