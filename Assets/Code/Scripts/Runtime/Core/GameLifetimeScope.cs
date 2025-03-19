@@ -25,6 +25,7 @@ namespace Game.Core
             builder.Register<SceneService>(Lifetime.Singleton).As<ISceneService>();
             builder.RegisterComponent(audioService).As<IAudioService>();
             builder.RegisterInstance(configLoader).As<IConfigLoader>();
+            builder.Register<R3EventBus>(Lifetime.Singleton).As<IEventBus>();
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
     }
