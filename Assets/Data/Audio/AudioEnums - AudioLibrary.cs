@@ -1,4 +1,4 @@
-namespace Code.Services.Audio {
+namespace Core.Services.Audio {
     public enum Sound {
         Click,
         Back,
@@ -6,7 +6,7 @@ namespace Code.Services.Audio {
         Error
     }
 }
-namespace Code.Services.Audio {
+namespace Core.Services.Audio {
     public enum Music {
         Loop
     }

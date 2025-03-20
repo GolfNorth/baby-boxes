@@ -27,12 +27,12 @@ MonoBehaviour:
   generatedName: AudioLibrary
   musicEnum: Music
   musicEnumGenerated: Music
-  musicNamespace: Code.Services.Audio
-  musicNamespaceGenerated: Code.Services.Audio
+  musicNamespace: Core.Services.Audio
+  musicNamespaceGenerated: Core.Services.Audio
   soundEnum: Sound
   soundEnumGenerated: Sound
-  soundNamespace: Code.Services.Audio
-  soundNamespaceGenerated: Code.Services.Audio
+  soundNamespace: Core.Services.Audio
+  soundNamespaceGenerated: Core.Services.Audio
   soundCategoriesToList:
   - name: SFX
     files:
