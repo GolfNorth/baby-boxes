@@ -28,14 +28,13 @@ public class TypeRestrictionAttribute : PropertyAttribute
     /// <summary>
     /// Конструктор атрибута TypeRestriction.
     /// </summary>
-    /// <param name="_type">Требуемый тип значения поля.</param>
-    /// <param name="_allowSceneObjects">Флаг, разрешающий использование объектов со сцены. По умолчанию true.</param>
-    /// <param name="_setToNull">Флаг, указывающий, нужно ли сбрасывать значение в null при несоответствии типа. По умолчанию true.</param>
-    public TypeRestrictionAttribute(Type _type, bool _allowSceneObjects = true, bool _setToNull = true)
+    /// <param name="type">Требуемый тип значения поля.</param>
+    /// <param name="allowSceneObjects">Флаг, разрешающий использование объектов со сцены. По умолчанию true.</param>
+    /// <param name="setToNull">Флаг, указывающий, нужно ли сбрасывать значение в null при несоответствии типа. По умолчанию true.</param>
+    public TypeRestrictionAttribute(Type type, bool allowSceneObjects = true, bool setToNull = true)
     {
-        // Инициализация полей атрибута переданными параметрами
-        Type = _type;
-        AllowSceneObjects = _allowSceneObjects;
-        SetToNull = _setToNull;
+        Type = type;
+        AllowSceneObjects = allowSceneObjects;
+        SetToNull = setToNull;
     }
 }
