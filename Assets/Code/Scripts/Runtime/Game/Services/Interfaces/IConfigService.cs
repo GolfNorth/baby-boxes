@@ -7,6 +7,6 @@ namespace Game.Services.Interfaces
     /// </summary>
     public interface IConfigService
     {
-        GameConfig Config { get; }
+        GameConfig GetConfig();
     }
 }

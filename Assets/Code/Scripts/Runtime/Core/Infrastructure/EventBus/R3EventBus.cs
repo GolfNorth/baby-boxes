@@ -10,7 +10,7 @@ namespace Core.Infrastructure
     /// </summary>
     public class R3EventBus : IEventBus
     {
-        private readonly Dictionary<Type, object> _eventSubjects = new Dictionary<Type, object>();
+        private readonly Dictionary<Type, object> _eventSubjects = new();
 
         public void Publish<TEvent>(TEvent eventMessage) where TEvent : class
         {

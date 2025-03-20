@@ -9,11 +9,16 @@ namespace Game.Services
     /// </summary>
     public class ConfigService : IConfigService
     {
-        public GameConfig Config { get; }
+        private readonly GameConfig _config;
 
         public ConfigService(IConfigLoader configLoader)
         {
-            Config = configLoader.LoadConfig();
+            _config = configLoader.LoadConfig();
+        }
+
+        public GameConfig GetConfig()
+        {
+            return _config;
         }
     }
 }
