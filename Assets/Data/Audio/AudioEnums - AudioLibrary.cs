@@ -1,13 +1,9 @@
-namespace Core.Services.Audio {
-    public enum Sound {
+    public enum SoundLibrary {
         Click,
         Back,
         Drop,
         Error
     }
-}
-namespace Core.Services.Audio {
-    public enum Music {
+    public enum MusicLibrary {
         Loop
     }
-}

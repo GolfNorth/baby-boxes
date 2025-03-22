@@ -25,14 +25,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a061487d390aec240b09d70aebc2bf4b, type: 2}
   useCustomNames: 1
   generatedName: AudioLibrary
-  musicEnum: Music
-  musicEnumGenerated: Music
-  musicNamespace: Core.Services.Audio
-  musicNamespaceGenerated: Core.Services.Audio
-  soundEnum: Sound
-  soundEnumGenerated: Sound
-  soundNamespace: Core.Services.Audio
-  soundNamespaceGenerated: Core.Services.Audio
+  musicEnum: MusicLibrary
+  musicEnumGenerated: MusicLibrary
+  musicNamespace: 
+  musicNamespaceGenerated: 
+  soundEnum: SoundLibrary
+  soundEnumGenerated: SoundLibrary
+  soundNamespace: 
+  soundNamespaceGenerated: 
   soundCategoriesToList:
   - name: SFX
     files:

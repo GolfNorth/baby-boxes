@@ -1,9 +1,9 @@
-using Core.Attributes;
+using Game.SDK.Attributes;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Core.Editor
+namespace Game.SDK.Editor
 {
     /// <summary>
     /// Отрисовщик атрибута <see cref="TypeRestrictionAttribute"/>.
