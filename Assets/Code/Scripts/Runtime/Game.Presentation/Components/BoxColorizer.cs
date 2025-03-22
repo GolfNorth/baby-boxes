@@ -3,7 +3,7 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI.Components
+namespace Game.Presentation.Components
 {
     /// <summary>
     /// Устанавливает цвет куба

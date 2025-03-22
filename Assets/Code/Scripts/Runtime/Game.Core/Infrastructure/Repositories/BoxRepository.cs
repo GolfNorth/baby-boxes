@@ -23,12 +23,14 @@ namespace Game.Infrastructure
             _modelFactory = modelFactory;
         }
 
-        public BoxViewModel GetCubeById(int id)
+        public IEnumerable<BoxViewModel> Boxes => _viewModels.Values;
+
+        public BoxViewModel GetBoxById(int id)
         {
             return _viewModels.GetValueOrDefault(id);
         }
 
-        public BoxViewModel CreateBox(Color color)
+        public BoxViewModel AddBox(Color color)
         {
             var model = _modelFactory.Invoke(_nextId, color);
             var viewModel = new BoxViewModel(model);
@@ -36,6 +38,11 @@ namespace Game.Infrastructure
             _viewModels.Add(_nextId++, viewModel);
 
             return viewModel;
+        }
+
+        public void RemoveBox(int id)
+        {
+            _viewModels.Remove(id);
         }
     }
 }

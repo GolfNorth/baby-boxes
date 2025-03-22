@@ -1,4 +1,5 @@
-﻿using Game.UI.Utils;
+﻿using Game.Controllers;
+using Game.UI.Utils;
 using R3;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,7 +16,7 @@ namespace Game.Presentation.Views
 
         private Vector3 _deltaPosition;
 
-        public static IObjectPool<BoxView> ObjectPool;
+        private BoxViewModel _viewModel;
 
         public ReactiveProperty<int> Id { get; } = new();
 
@@ -26,21 +27,14 @@ namespace Game.Presentation.Views
             _rect = (RectTransform)transform;
         }
 
-        public void Init(int id, Color color)
+        public void Init(BoxViewModel viewModel)
         {
-            Id.Value = id;
-            Color.Value = color;
-        }
-
-        public void Release()
-        {
-            ObjectPool.Release(this);
+            Id.Value = viewModel.Id.CurrentValue;
+            Color.Value = viewModel.Color.CurrentValue;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.Log("?");
-            
             if (_rect.TryGetWorldPoint(eventData.position, out var rectPosition))
             {
                 _rect.position = rectPosition - _deltaPosition;

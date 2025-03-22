@@ -52,7 +52,7 @@ namespace Game.Context
         {
             foreach (var color in _gameConfig.BoxColors)
             {
-                var viewModel = _boxRepository.CreateBox(color);
+                var viewModel = _boxRepository.AddBox(color);
 
                 _eventBus.Publish(new BoxCreatedEvent(viewModel.Id.CurrentValue));
             }

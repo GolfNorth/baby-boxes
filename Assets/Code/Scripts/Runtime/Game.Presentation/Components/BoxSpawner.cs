@@ -3,7 +3,8 @@ using Game.SDK.Infrastructure.Interfaces;
 using Game.Events;
 using Game.Presentation.Views;
 using Game.Systems.Interfaces;
-using Game.UI.Components;
+using Game.Presentation.Components;
+using R3;
 using UnityEngine;
 using UnityEngine.Pool;
 using VContainer;
@@ -35,13 +36,23 @@ namespace Game.Controllers
             _boxRepository = boxRepository;
             _boxPool = boxPool;
 
+            foreach (var viewModel in boxRepository.Boxes)
+            {
+                CreateView(viewModel);
+            }
+
             eventBus.Subscribe<BoxCreatedEvent>(OnBoxCreated);
         }
 
         private void OnBoxCreated(BoxCreatedEvent e)
         {
-            var viewModel = _boxRepository.GetCubeById(e.Id);
+            var viewModel = _boxRepository.GetBoxById(e.Id);
 
+            CreateView(viewModel);
+        }
+
+        private void CreateView(BoxViewModel viewModel)
+        {
             if (!_boxPlaceholders.TryGetValue(viewModel.Color.CurrentValue, out var placeholder))
             {
                 placeholder = CreatePlaceholder();
@@ -50,6 +61,9 @@ namespace Game.Controllers
             }
 
             var view = _boxPool.Get();
+            
+            view.Init(viewModel);
+            view.gameObject.name = $"Box #{viewModel.Id.CurrentValue}";
 
             // TODO Inject вьюшки
 

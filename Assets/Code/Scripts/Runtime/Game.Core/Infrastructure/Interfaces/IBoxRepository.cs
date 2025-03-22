@@ -1,4 +1,5 @@
-﻿using Game.Controllers;
+﻿using System.Collections.Generic;
+using Game.Controllers;
 using UnityEngine;
 
 namespace Game.Systems.Interfaces
@@ -8,14 +9,21 @@ namespace Game.Systems.Interfaces
     /// </summary>
     public interface IBoxRepository
     {
+        IEnumerable<BoxViewModel> Boxes { get; }
+        
         /// <summary>
         /// Получить инстанс куба по его идентификатору
         /// </summary>
-        BoxViewModel GetCubeById(int id);
+        BoxViewModel GetBoxById(int id);
 
         /// <summary>
         /// Создает новый куб
         /// </summary>
-        BoxViewModel CreateBox(Color color);
+        BoxViewModel AddBox(Color color);
+
+        /// <summary>
+        /// Удаляет куб
+        /// </summary>
+        void RemoveBox(int id);
     }
 }

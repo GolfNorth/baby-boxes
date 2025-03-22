@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI.Components
+namespace Game.Presentation.Components
 {
     /// <summary>
     /// A concrete subclass of the Unity UI `Graphic` class that just skips drawing.

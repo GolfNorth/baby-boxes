@@ -1,7 +1,7 @@
 ﻿using Game.Presentation.Views;
 using UnityEngine;
 
-namespace Game.UI.Components
+namespace Game.Presentation.Components
 {
     /// <summary>
     /// Враппер для кубов

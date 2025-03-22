@@ -18,8 +18,6 @@ namespace Game.Presentation.Infractructure
 
         private void Awake()
         {
-            BoxView.ObjectPool = this;
-
             _objectPool = new ObjectPool<BoxView>(
                 CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject
             );
