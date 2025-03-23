@@ -1,4 +1,5 @@
-﻿using Game.Infrastructure.Interfaces;
+﻿using System;
+using Game.Infrastructure.Interfaces;
 using Game.ViewModels;
 using UnityEngine;
 using VContainer;
@@ -9,7 +10,7 @@ namespace Game.Presentation.Views
     /// <summary>
     /// Вьюшка башни
     /// </summary>
-    public class TowerView : MonoBehaviour, ILateTickable
+    public class TowerView : MonoBehaviour
     {
         private RectTransform _rect;
 
@@ -23,7 +24,7 @@ namespace Game.Presentation.Views
             _towerViewModel.Size.Value = _rect.rect.size;
         }
 
-        public void LateTick()
+        private void LateUpdate()
         {
             if (!transform.hasChanged)
                 return;

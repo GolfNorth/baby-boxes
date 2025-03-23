@@ -1,4 +1,5 @@
-﻿using Game.ViewModels;
+﻿using Game.Enums;
+using Game.ViewModels;
 using UnityEngine;
 
 namespace Game.Infrastructure
@@ -8,6 +9,6 @@ namespace Game.Infrastructure
     /// </summary>
     public interface IPlacementStrategy
     {
-        bool TryPlace(TowerViewModel towerViewModel, BoxViewModel boxViewModel, Vector2 boxPosition);
+        bool TryPlace(BoxViewModel boxViewModel, Vector2 boxPosition, out PlacementError error);
     }
 }

@@ -44,6 +44,9 @@ namespace Game.Infrastructure
                 case BoxPlacement.Bin:
                     RemoveBox(viewModel);
                     break;
+                case BoxPlacement.None when viewModel.State.Value == BoxState.Placed:
+                    ReturnBox(viewModel);
+                    break;
                 default:
                     DestroyBox(viewModel);
                     break;
@@ -54,15 +57,22 @@ namespace Game.Infrastructure
         {
             var strategy = _placementFactory.GetStrategy(_towerViewModel, viewModel);
 
-            if (strategy.TryPlace(_towerViewModel, viewModel, position))
+            if (strategy.TryPlace(viewModel, position, out var error))
             {
                 viewModel.State.Value = BoxState.Placed;
+                _towerViewModel.AddBox(viewModel.Id.CurrentValue);
                 _eventBus.Publish(new BoxPlacedEvent(viewModel.Id.CurrentValue, viewModel.Position.Value));
             }
             else
             {
                 DestroyBox(viewModel);
+                _eventBus.Publish(new BoxPlacementErrorEvent(viewModel.Id.CurrentValue, error));
             }
+        }
+
+        private void ReturnBox(BoxViewModel viewModel)
+        {
+            _eventBus.Publish(new BoxReturnedEvent(viewModel.Id.CurrentValue));
         }
 
         private void RemoveBox(BoxViewModel viewModel)
@@ -70,6 +80,7 @@ namespace Game.Infrastructure
             if (viewModel.State.Value == BoxState.Placed)
             {
                 viewModel.State.Value = BoxState.Removed;
+                _towerViewModel.RemoveBox(viewModel.Id.CurrentValue);
                 _eventBus.Publish(new BoxRemovedEvent(viewModel.Id.CurrentValue));
             }
             else
@@ -81,6 +92,7 @@ namespace Game.Infrastructure
         private void DestroyBox(BoxViewModel viewModel)
         {
             viewModel.State.Value = BoxState.Destroyed;
+            _towerViewModel.RemoveBox(viewModel.Id.CurrentValue);
             _eventBus.Publish(new BoxDestroyedEvent(viewModel.Id.CurrentValue));
         }
     }

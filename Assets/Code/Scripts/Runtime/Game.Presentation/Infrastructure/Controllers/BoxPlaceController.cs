@@ -30,10 +30,20 @@ namespace Game.Presentation.Infractructure
 
             eventBus.Subscribe<BoxRemovedEvent>(OnBoxRemoved);
             eventBus.Subscribe<BoxPlacedEvent>(OnBoxPlaced);
+            eventBus.Subscribe<BoxReturnedEvent>(OnBoxReturned);
             eventBus.Subscribe<BoxDestroyedEvent>(OnBoxDestroyed);
         }
 
         private void OnBoxPlaced(BoxPlacedEvent e)
+        {
+            var view = _viewFactory.Invoke(e.Id);
+
+            towerPlaceholder.Place(view);
+
+            _eventBus.Publish(new BoxPlacementChangedEvent(view, BoxPlacement.Tower));
+        }
+
+        private void OnBoxReturned(BoxReturnedEvent e)
         {
             var view = _viewFactory.Invoke(e.Id);
 
