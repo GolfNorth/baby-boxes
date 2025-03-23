@@ -71,5 +71,51 @@ namespace Game.Presentation.Utils
             return RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, screenPosition,
                 Camera.main, out worldPoint);
         }
+
+        /// <summary>
+        /// Проверяет полную видимость трансформа
+        /// </summary>
+        /// <param name="_rectTransform">Заданный трансформ</param>
+        public static bool IsFullyVisible(this RectTransform _rectTransform)
+        {
+            return CountCornersVisibleFrom(_rectTransform) == 4;
+        }
+
+        /// <summary>
+        /// Проверяет видимость трансформа
+        /// </summary>
+        /// <param name="_rectTransform">Заданный трансформ</param>
+        public static bool IsVisible(this RectTransform _rectTransform)
+        {
+            return CountCornersVisibleFrom(_rectTransform) > 0;
+        }
+
+        /// <summary>
+        /// Возвращает количество видимых углов трансформа
+        /// </summary>
+        /// <param name="_rectTransform">Заданный трансформ</param>
+        private static int CountCornersVisibleFrom(this RectTransform _rectTransform)
+        {
+            if (!_rectTransform.gameObject.activeInHierarchy)
+                return 0;
+
+            var screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
+            var objectCorners = new Vector3[4];
+            var result = 0;
+
+            _rectTransform.GetWorldCorners(objectCorners);
+
+            for (var i = 0; i < objectCorners.Length; i++)
+            {
+                var screenSpaceCorner = Camera.main.WorldToScreenPoint(objectCorners[i]);
+
+                if (screenBounds.Contains(screenSpaceCorner))
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
     }
 }

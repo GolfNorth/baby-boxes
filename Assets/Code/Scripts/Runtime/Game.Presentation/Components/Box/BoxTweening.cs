@@ -1,5 +1,6 @@
 ﻿using Game.Enums;
 using Game.Presentation.Events;
+using Game.Presentation.Utils;
 using Game.SDK.Infrastructure.Interfaces;
 using R3;
 using UnityEngine;
@@ -42,7 +43,16 @@ namespace Game.Presentation.Components
             switch (e.Placement)
             {
                 case BoxPlacement.Stack:
-                    toStack.Play(_rect, Vector2.zero, OnComplete);
+                    if (_rect.IsVisible())
+                    {
+                        toStack.Play(_rect, Vector2.zero, OnComplete);
+                    }
+                    else
+                    {
+                        _rect.anchoredPosition = Vector2.zero;
+                        OnComplete();
+                    }
+
                     break;
                 case BoxPlacement.Bin:
                     toBin.Play(_rect, Vector2.zero, OnComplete);
