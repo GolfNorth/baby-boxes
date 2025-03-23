@@ -38,6 +38,11 @@ namespace Game.Presentation.Components
         private void Awake()
         {
             _defaultColor = text.color;
+
+            boxPlacement.RefreshString();
+            boxRemoval.RefreshString();
+            boxDropping.RefreshString();
+            boxLimitation.RefreshString();
         }
 
         [Inject]
