@@ -1,6 +1,8 @@
 ﻿using Game.Presentation.Views;
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer;
+using VContainer.Unity;
 
 namespace Game.Presentation.Infractructure
 {
@@ -14,10 +16,15 @@ namespace Game.Presentation.Infractructure
 
         private ObjectPool<BoxView> _objectPool;
 
+        private IObjectResolver _container;
+
         public int CountInactive => _objectPool.CountInactive;
 
-        private void Awake()
+        [Inject]
+        private void Construct(IObjectResolver container)
         {
+            _container = container;
+
             _objectPool = new ObjectPool<BoxView>(
                 CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject
             );
@@ -25,7 +32,11 @@ namespace Game.Presentation.Infractructure
 
         private BoxView CreatePooledItem()
         {
-            return Instantiate(boxPrefab);
+            var view = Instantiate(boxPrefab);
+
+            _container.InjectGameObject(view.gameObject);
+
+            return view;
         }
 
         private void OnTakeFromPool(BoxView view)

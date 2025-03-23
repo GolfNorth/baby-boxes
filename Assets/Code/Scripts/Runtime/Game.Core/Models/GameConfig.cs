@@ -16,15 +16,21 @@ namespace Game.Models
         public int BoxCount { get; }
 
         /// <summary>
+        /// Размер куба
+        /// </summary>
+        public Vector2 BoxSize { get; }
+
+        /// <summary>
         /// Цвета кубиков
         /// </summary>
         public IReadOnlyCollection<Color> BoxColors { get; }
 
-        public GameConfig(IEnumerable<Color> boxColors)
+        public GameConfig(IEnumerable<Color> boxColors, Vector2 boxSize)
         {
             if (boxColors == null)
                 throw new ArgumentNullException(nameof(boxColors));
 
+            BoxSize = boxSize;
             BoxColors = boxColors.ToList();
             BoxCount = BoxColors.Count;
         }

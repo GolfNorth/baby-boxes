@@ -16,6 +16,7 @@ namespace Game.Infrastructure
         public override GameConfig LoadConfig()
         {
             return new GameConfigBuilder()
+                .SetBoxSize(configData.Size)
                 .SetBoxColors(configData.Colors)
                 .Build();
         }

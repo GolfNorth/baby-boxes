@@ -10,7 +10,16 @@ namespace Game.Infrastructure
     /// </summary>
     public class GameConfigBuilder
     {
+        private Vector2 _boxSize;
+        
         private IEnumerable<Color> _boxColors;
+
+        public GameConfigBuilder SetBoxSize(Vector2 boxSize)
+        {
+            _boxSize = boxSize;
+
+            return this;
+        }
 
         public GameConfigBuilder SetBoxColors(IEnumerable<Color> boxColors)
         {
@@ -21,7 +30,7 @@ namespace Game.Infrastructure
 
         public GameConfig Build()
         {
-            return new GameConfig(_boxColors);
+            return new GameConfig(_boxColors, _boxSize);
         }
     }
 }

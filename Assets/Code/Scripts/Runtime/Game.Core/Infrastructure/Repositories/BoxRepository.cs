@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Controllers;
+using Game.Infrastructure.Interfaces;
+using Game.ViewModels;
 using Game.Models;
-using Game.Systems.Interfaces;
+using Game.Services.Interfaces;
 using UnityEngine;
 
 namespace Game.Infrastructure
@@ -16,11 +17,14 @@ namespace Game.Infrastructure
 
         private readonly Func<int, Color, BoxModel> _modelFactory;
 
+        private readonly ISaveService _saveService;
+
         private readonly Dictionary<int, BoxViewModel> _viewModels = new();
 
-        public BoxRepository(Func<int, Color, BoxModel> modelFactory)
+        public BoxRepository(Func<int, Color, BoxModel> modelFactory, ISaveService saveService)
         {
             _modelFactory = modelFactory;
+            _saveService = saveService;
         }
 
         public IEnumerable<BoxViewModel> Boxes => _viewModels.Values;

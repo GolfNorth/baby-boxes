@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Game.Controllers;
+using Game.ViewModels;
 
 namespace Game.Infrastructure.Interfaces
 {

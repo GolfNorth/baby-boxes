@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.UI.Utils
+namespace Game.Presentation.Utils
 {
     /// <summary>
     /// Методы расширения для компонента <see cref="RectTransform"/>
@@ -28,6 +28,20 @@ namespace Game.UI.Utils
         }
 
         /// <summary>
+        /// Содержит ли полностью заданный трансформ другой
+        /// </summary>
+        /// <param name="rectA">Заданный трансформ</param>
+        /// <param name="rectB">Другой трансформ</param>
+        public static bool Contains(this RectTransform rectA, RectTransform rectB)
+        {
+            var worldRectA = rectA.GetWorldRect();
+            var worldRectB = rectB.GetWorldRect();
+
+            return worldRectA.xMin <= worldRectB.xMin && worldRectA.xMax >= worldRectB.xMax &&
+                   worldRectA.yMin <= worldRectB.yMin && worldRectA.yMax >= worldRectB.yMax;
+        }
+
+        /// <summary>
         /// Возвращает состояние пересечения двух трансформов
         /// </summary>
         /// <param name="rect">Заданный трансформ</param>
@@ -38,16 +52,15 @@ namespace Game.UI.Utils
         }
 
         /// <summary>
-        /// Возвращает состояние пересечения точки трансформа
+        /// Возвращает относительную позицию трансформа
         /// </summary>
-        /// <param name="rect">Заданный трансформ</param>
-        /// <param name="screenPoint">Позиция на экране</param>
-        public static bool Overlaps(this RectTransform rect, Vector2 screenPoint)
+        /// <param name="from">Трансформ цели</param>
+        /// <param name="to">Трансформ отсчета</param>
+        public static Vector2 GetRelativePosition(this RectTransform from, RectTransform to)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, Camera.main,
-                out var localPosition);
-
-            return rect.rect.Contains(localPosition);
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(null, from.position);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(to, screenPoint, null, out var localPoint);
+            return localPoint;
         }
 
         /// <summary> 
@@ -57,52 +70,6 @@ namespace Game.UI.Utils
         {
             return RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, screenPosition,
                 Camera.main, out worldPoint);
-        }
-
-        /// <summary>
-        /// Проверяет полную видимость трансформа
-        /// </summary>
-        /// <param name="rect">Заданный трансформ</param>
-        public static bool IsFullyVisible(this RectTransform rect)
-        {
-            return CountCornersVisibleFrom(rect) == 4;
-        }
-
-        /// <summary>
-        /// Проверяет видимость трансформа
-        /// </summary>
-        /// <param name="rect">Заданный трансформ</param>
-        public static bool IsVisible(this RectTransform rect)
-        {
-            return CountCornersVisibleFrom(rect) > 0;
-        }
-
-        /// <summary>
-        /// Возвращает количество видимых углов трансформа
-        /// </summary>
-        /// <param name="rect">Заданный трансформ</param>
-        private static int CountCornersVisibleFrom(this RectTransform rect)
-        {
-            if (!rect.gameObject.activeInHierarchy)
-                return 0;
-
-            var screenBounds = new Rect(0f, 0f, Screen.width, Screen.height);
-            var objectCorners = new Vector3[4];
-            var result = 0;
-
-            rect.GetWorldCorners(objectCorners);
-
-            for (var i = 0; i < objectCorners.Length; i++)
-            {
-                var screenSpaceCorner = Camera.main.WorldToScreenPoint(objectCorners[i]);
-
-                if (screenBounds.Contains(screenSpaceCorner))
-                {
-                    result++;
-                }
-            }
-
-            return result;
         }
     }
 }

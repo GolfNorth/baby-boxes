@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Controllers;
+using Game.ViewModels;
 using Game.Infrastructure.Interfaces;
 using Game.Models;
 

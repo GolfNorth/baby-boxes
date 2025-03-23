@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b34cbe0fe3466fba85e2b3a91eb2da, type: 3}
   m_Name: GameConfigData
   m_EditorClassIdentifier: 
+  <Size>k__BackingField: {x: 128, y: 128}
   <Colors>k__BackingField:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.43921572, g: 0.43921572, b: 0.43921572, a: 1}

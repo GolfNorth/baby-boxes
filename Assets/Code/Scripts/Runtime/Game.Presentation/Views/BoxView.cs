@@ -1,56 +1,33 @@
-﻿using Game.Controllers;
-using Game.UI.Utils;
+﻿using Game.ViewModels;
 using R3;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Pool;
 
 namespace Game.Presentation.Views
 {
     /// <summary>
     /// Вьюшка куба
     /// </summary>
-    public class BoxView : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class BoxView : MonoBehaviour
     {
-        private RectTransform _rect;
+        private readonly ReactiveProperty<BoxViewModel> _dataContext = new();
 
-        private Vector3 _deltaPosition;
+        public ReadOnlyReactiveProperty<BoxViewModel> DataContext => _dataContext;
 
-        private BoxViewModel _viewModel;
+        public RectTransform Rect { get; private set; }
 
-        public ReactiveProperty<int> Id { get; } = new();
+        public int Id => DataContext != null ? DataContext.CurrentValue.Id.CurrentValue : -1;
 
-        public ReactiveProperty<Color> Color { get; } = new();
+        public Color Color => DataContext != null ? DataContext.CurrentValue.Color.CurrentValue : Color.white;
 
         private void Awake()
         {
-            _rect = (RectTransform)transform;
+            Rect = (RectTransform)transform;
         }
 
-        public void Init(BoxViewModel viewModel)
+        public void Init(BoxViewModel dataContext)
         {
-            Id.Value = viewModel.Id.CurrentValue;
-            Color.Value = viewModel.Color.CurrentValue;
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            if (_rect.TryGetWorldPoint(eventData.position, out var rectPosition))
-            {
-                _rect.position = rectPosition - _deltaPosition;
-            }
-        }
-
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            _rect.TryGetWorldPoint(eventData.position, out _deltaPosition);
-
-            _deltaPosition -= _rect.position;
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            // TODO
+            gameObject.name = $"Box Id:{dataContext.Id.CurrentValue}";
+            _dataContext.Value = dataContext;
         }
     }
 }

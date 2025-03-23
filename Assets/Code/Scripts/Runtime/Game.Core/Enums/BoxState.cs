@@ -7,7 +7,6 @@
     {
         None,
         Idle,
-        Dragging,
         Placed,
         Removed,
         Destroyed

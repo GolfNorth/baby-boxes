@@ -9,6 +9,12 @@ namespace Game.Data
     public class GameConfigData : ScriptableObject
     {
         /// <summary>
+        /// Размер куба
+        /// </summary>
+        [field: SerializeField]
+        public Vector2 Size { get; private set; }
+
+        /// <summary>
         /// Игровые данные
         /// </summary>
         [field: SerializeField]

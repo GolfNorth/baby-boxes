@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Game.Controllers;
+using Game.ViewModels;
 using UnityEngine;
 
-namespace Game.Systems.Interfaces
+namespace Game.Infrastructure.Interfaces
 {
     /// <summary>
     /// Интерфейс репозитория кубов

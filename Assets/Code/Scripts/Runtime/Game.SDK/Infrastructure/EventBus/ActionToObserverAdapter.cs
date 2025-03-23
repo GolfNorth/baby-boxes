@@ -1,5 +1,6 @@
 ﻿using System;
 using R3;
+using UnityEngine;
 
 namespace Game.SDK.Infrastructure
 {
@@ -19,6 +20,7 @@ namespace Game.SDK.Infrastructure
 
         protected override void OnErrorResumeCore(Exception error)
         {
+            Debug.LogException(error);
         }
 
         protected override void OnCompletedCore(Result result)
