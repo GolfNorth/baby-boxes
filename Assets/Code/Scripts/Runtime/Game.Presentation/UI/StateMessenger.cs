@@ -1,5 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
+using Game.Enums;
 using Game.Events;
 using Game.SDK.Infrastructure.Interfaces;
 using R3;
@@ -46,7 +46,13 @@ namespace Game.Presentation.Components
             eventBus.Subscribe<BoxPlacedEvent>(_ => ShowMessage(boxPlacement.GetLocalizedString())).AddTo(this);
             eventBus.Subscribe<BoxRemovedEvent>(_ => ShowMessage(boxRemoval.GetLocalizedString())).AddTo(this);
             eventBus.Subscribe<BoxDestroyedEvent>(_ => ShowMessage(boxDropping.GetLocalizedString())).AddTo(this);
-            // TODO eventBus.Subscribe<BoxDestroyedEvent>(_ => ShowMessage(boxLimitation.GetLocalizedString())).AddTo(this);
+            eventBus.Subscribe<BoxPlacementErrorEvent>(e =>
+            {
+                if (e.Error == PlacementError.LimitReached)
+                {
+                    ShowMessage(boxLimitation.GetLocalizedString());
+                }
+            }).AddTo(this);
         }
 
         private void ShowMessage(string message)
