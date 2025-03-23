@@ -5,6 +5,8 @@
     /// </summary>
     public interface ISaveService
     {
-        // TODO
+        void Set(string data);
+        string Get();
+        void Save();
     }
 }

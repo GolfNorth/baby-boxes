@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolParent: {fileID: 52179483}
-  towerPlaceholder: {fileID: 1938855815}
+  towerPlaceholder: {fileID: 1020038089}
   placeholderPrefab: {fileID: 2914925251832280037, guid: 97ced38c47ccff844ba82e59fe3c90ec, type: 3}
 --- !u!114 &588685261
 MonoBehaviour:
@@ -1074,6 +1074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1073603096}
   - component: {fileID: 1073603095}
+  - component: {fileID: 1073603097}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1096,7 +1097,8 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 1073603094}
   configLoader: {fileID: 11400000, guid: 01273a02b99ee244a932a357da8dd6ad, type: 2}
 --- !u!4 &1073603096
 Transform:
@@ -1113,6 +1115,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 874137629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073603097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073603094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25a5e37c52d4b04a164a16791f59c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438460207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: ff9d70fe27111004c9fcff5583b76dbf, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

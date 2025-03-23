@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Infrastructure;
 using Game.Infrastructure.Interfaces;
 using Game.Models;
@@ -28,6 +29,7 @@ namespace Game.Context
             builder.Register<BoxRepository>(Lifetime.Singleton).As<IBoxRepository>();
             builder.Register<TowerRepository>(Lifetime.Singleton).As<ITowerRepository>();
 
+            builder.Register<SaveSystem>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<SpawnSystem>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlacementSystem>(Lifetime.Singleton).AsImplementedInterfaces();
 

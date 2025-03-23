@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace Game.Infrastructure
 {
-    public class SpawnSystem : ISpawnSystem, IStartable
+    public class SpawnSystem : ISpawnSystem, IPostStartable
     {
         private readonly IBoxRepository _boxRepository;
 
@@ -32,7 +32,7 @@ namespace Game.Infrastructure
             _eventBus.Subscribe<BoxDroppedEvent>(OnBoxDropped);
         }
 
-        public void Start()
+        public void PostStart()
         {
             SpawnTower();
             SpawnPalette();
