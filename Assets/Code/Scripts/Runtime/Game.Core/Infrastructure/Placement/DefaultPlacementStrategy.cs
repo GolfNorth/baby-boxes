@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Game.Enums;
 using Game.Infrastructure.Interfaces;
 using Game.Services.Interfaces;
@@ -28,20 +27,19 @@ namespace Game.Infrastructure
         {
             error = PlacementError.None;
 
-            if (_towerViewModel.BoxIds.Count == 0)
+            if (_towerViewModel.Boxes.Count == 0)
             {
                 boxViewModel.Position.Value = boxPosition;
 
                 return true;
             }
 
-            if (_towerViewModel.BoxIds.Contains(boxViewModel.Id.CurrentValue))
+            if (_towerViewModel.Boxes.Contains(boxViewModel))
             {
                 return true;
             }
 
-            var boxes = GetSortedBoxes();
-            var lastPosition = boxes.Last().Position.Value;
+            var lastPosition = _towerViewModel.Boxes.Last().Position.Value;
             var yPosition = lastPosition.y + _boxSize.y;
             var towerRect = new Rect(new Vector2(-_towerViewModel.Size.Value.x / 2, 0), _towerViewModel.Size.Value);
 
@@ -70,14 +68,6 @@ namespace Game.Infrastructure
             boxViewModel.Position.Value = new Vector2(xPosition, yPosition);
 
             return true;
-        }
-
-        private IList<BoxViewModel> GetSortedBoxes()
-        {
-            return _towerViewModel.BoxIds
-                .Select(x => _boxRepository.GetBoxById(x))
-                .OrderBy(x => x.Position.Value.y)
-                .ToList();
         }
     }
 }

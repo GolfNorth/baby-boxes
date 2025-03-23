@@ -80,6 +80,9 @@ namespace Game.Infrastructure
             if (viewModel.State.Value == BoxState.Placed)
             {
                 viewModel.State.Value = BoxState.Removed;
+
+                DropUpperBoxes(viewModel);
+
                 _towerViewModel.RemoveBox(viewModel.Id.CurrentValue);
                 _eventBus.Publish(new BoxRemovedEvent(viewModel.Id.CurrentValue));
             }
@@ -94,6 +97,27 @@ namespace Game.Infrastructure
             viewModel.State.Value = BoxState.Destroyed;
             _towerViewModel.RemoveBox(viewModel.Id.CurrentValue);
             _eventBus.Publish(new BoxDestroyedEvent(viewModel.Id.CurrentValue));
+        }
+
+        private void DropUpperBoxes(BoxViewModel viewModel)
+        {
+            if (_towerViewModel.Boxes.Count == 1)
+                return;
+
+            for (var i = _towerViewModel.Boxes.Count - 1; i >= 0; i--)
+            {
+                var vm = _towerViewModel.Boxes[i];
+
+                if (vm == viewModel)
+                    break;
+
+                var vmLower = _towerViewModel.Boxes[i - 1];
+
+                vm.Position.Value = vmLower.Position.Value;
+
+
+                _eventBus.Publish(new BoxPlacedEvent(vm.Id.CurrentValue, vm.Position.Value));
+            }
         }
     }
 }

@@ -10,11 +10,14 @@ namespace Game.Infrastructure
     {
         private TowerViewModel _towerViewModel;
 
-        private Func<IEnumerable<int>, TowerModel> _modelFactory;
+        private readonly Func<IEnumerable<int>, TowerModel> _modelFactory;
 
-        public TowerRepository(Func<IEnumerable<int>, TowerModel> modelFactory)
+        private readonly IBoxRepository _boxRepository;
+
+        public TowerRepository(Func<IEnumerable<int>, TowerModel> modelFactory, IBoxRepository boxRepository)
         {
             _modelFactory = modelFactory;
+            _boxRepository = boxRepository;
         }
 
         public TowerViewModel GetTower(IEnumerable<int> boxIds = null)
@@ -23,7 +26,7 @@ namespace Game.Infrastructure
             {
                 var model = _modelFactory.Invoke(boxIds);
 
-                _towerViewModel = new TowerViewModel(model);
+                _towerViewModel = new TowerViewModel(model, _boxRepository);
             }
 
             return _towerViewModel;

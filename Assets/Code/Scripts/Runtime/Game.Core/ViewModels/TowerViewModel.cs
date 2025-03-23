@@ -1,4 +1,7 @@
-﻿using Game.Models;
+﻿using System.Collections.Generic;
+using Game.Infrastructure;
+using Game.Infrastructure.Interfaces;
+using Game.Models;
 using ObservableCollections;
 using R3;
 using UnityEngine;
@@ -9,16 +12,19 @@ namespace Game.ViewModels
     {
         private readonly TowerModel _model;
 
-        private readonly ObservableList<int> _boxIds;
+        private readonly IBoxRepository _boxRepository;
 
-        public IReadOnlyObservableList<int> BoxIds => _boxIds;
+        private readonly ObservableList<BoxViewModel> _boxes;
+
+        public IReadOnlyObservableList<BoxViewModel> Boxes => _boxes;
 
         public ReactiveProperty<Vector2> Size { get; } = new();
 
-        public TowerViewModel(TowerModel model)
+        public TowerViewModel(TowerModel model, IBoxRepository boxRepository)
         {
             _model = model;
-            _boxIds = new ObservableList<int>();
+            _boxRepository = boxRepository;
+            _boxes = new ObservableList<BoxViewModel>();
 
             Size.Subscribe(x => _model.Size = x);
         }
@@ -28,8 +34,12 @@ namespace Game.ViewModels
         /// </summary>
         public void AddBox(int id)
         {
-            _boxIds.Add(id);
+            var box = _boxRepository.GetBoxById(id);
+
+            _boxes.Add(box);
             _model.BoxIds.Add(id);
+
+            _boxes.Sort(new BoxComparerByPosition());
         }
 
         /// <summary>
@@ -37,8 +47,12 @@ namespace Game.ViewModels
         /// </summary>
         public void RemoveBox(int id)
         {
-            _boxIds.Remove(id);
+            var box = _boxRepository.GetBoxById(id);
+
+            _boxes.Remove(box);
             _model.BoxIds.Remove(id);
+
+            _boxes.Sort(new BoxComparerByPosition());
         }
     }
 }
