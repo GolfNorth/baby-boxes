@@ -53,11 +53,12 @@ namespace Game.Infrastructure
                 return false;
             }
 
-            var xMinPosition = lastPosition.x - _boxSize.x / 2;
-            var xMaxPosition = lastPosition.x + _boxSize.x / 2;
+            var xBoxHalf = _boxSize.x / 2;
+            var xMinPosition = lastPosition.x - xBoxHalf;
+            var xMaxPosition = lastPosition.x + xBoxHalf;
 
-            xMinPosition = xMinPosition < towerRect.xMin + _boxSize.x ? towerRect.xMin + _boxSize.x : xMinPosition;
-            xMaxPosition = xMaxPosition > towerRect.xMax + _boxSize.x ? towerRect.xMax - _boxSize.x : xMaxPosition;
+            xMinPosition = xMinPosition < towerRect.xMin + xBoxHalf ? towerRect.xMin + xBoxHalf : xMinPosition;
+            xMaxPosition = xMaxPosition > towerRect.xMax + xBoxHalf ? towerRect.xMax - xBoxHalf : xMaxPosition;
 
             if (boxPosition.x < xMinPosition || boxPosition.x > xMaxPosition)
             {
