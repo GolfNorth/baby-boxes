@@ -6,7 +6,8 @@
     public enum PlacementError
     {
         None,
+        Missed,
         LowerLast,
-        LimitReached
+        LimitReached,
     }
 }

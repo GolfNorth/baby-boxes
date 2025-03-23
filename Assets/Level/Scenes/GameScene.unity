@@ -743,7 +743,7 @@ MonoBehaviour:
   dragPlaceholder: {fileID: 776252696}
   towerRect: {fileID: 205308395}
   towerPlaceholder: {fileID: 1020038089}
-  binRect: {fileID: 486736431}
+  binRect: {fileID: 435480249}
   binPlaceholder: {fileID: 1938855815}
 --- !u!114 &588685262
 MonoBehaviour:

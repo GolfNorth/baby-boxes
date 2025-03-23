@@ -9,17 +9,13 @@ namespace Game.Infrastructure
 {
     public class DefaultPlacementStrategy : IPlacementStrategy
     {
-        private readonly IBoxRepository _boxRepository;
-
         private readonly TowerViewModel _towerViewModel;
 
         private readonly Vector2 _boxSize;
 
-        public DefaultPlacementStrategy(IBoxRepository boxRepository, ITowerRepository towerRepository,
-            IConfigService configService)
+        public DefaultPlacementStrategy(ITowerRepository towerRepository, IConfigService configService)
         {
             _boxSize = configService.GetConfig().BoxSize;
-            _boxRepository = boxRepository;
             _towerViewModel = towerRepository.GetTower();
         }
 
@@ -63,9 +59,14 @@ namespace Game.Infrastructure
             xMinPosition = xMinPosition < towerRect.xMin + _boxSize.x ? towerRect.xMin + _boxSize.x : xMinPosition;
             xMaxPosition = xMaxPosition > towerRect.xMax + _boxSize.x ? towerRect.xMax - _boxSize.x : xMaxPosition;
 
-            var xPosition = Random.Range(xMinPosition, xMaxPosition);
+            if (boxPosition.x < xMinPosition || boxPosition.x > xMaxPosition)
+            {
+                error = PlacementError.Missed;
 
-            boxViewModel.Position.Value = new Vector2(xPosition, yPosition);
+                return false;
+            }
+
+            boxViewModel.Position.Value = new Vector2(boxPosition.x, yPosition);
 
             return true;
         }
